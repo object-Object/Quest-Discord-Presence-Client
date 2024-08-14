@@ -27,6 +27,14 @@ namespace Quest_Discord_Presence_Client
             }
         }
 
+        public static ClientStatus RequestSucceededButIdle
+        {
+            get
+            {
+                return new ClientStatus("Successfully received presence from Quest,\nbut disabled Discord presence due to idle timeout");
+            }
+        }
+
         public static ClientStatus NoRequestMade
         {
             get

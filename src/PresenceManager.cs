@@ -57,13 +57,13 @@ namespace Quest_Discord_Presence_Client {
                     ) {
                         client.ClearPresence();
                         Console.WriteLine($"Disabling presence due to idling for more than {app.Config.IdleTimeoutMinutes} minutes");
+                        LastRequestStatus = ClientStatus.RequestSucceededButIdle;
                     } else {
                         // Set the received presence
                         client.SetPresence(fetchedStatus.ConvertToDiscord(elapsedStartTime));
                         Console.WriteLine("Successfully fetched presence");
+                        LastRequestStatus = ClientStatus.RequestSucceeded;
                     }
-
-                    LastRequestStatus = ClientStatus.RequestSucceeded;
                 }   catch(Exception ex) {                    
                     Console.Error.WriteLine("Exception occured while fetching the presence from the Quest (is your IP address correct and Beat Saber open?): " + ex.Message);
                     
