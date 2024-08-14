@@ -6,3 +6,4 @@ obj/
 installer/inno/
 installer/windows-installer.exe
 
+*.generated.sln
