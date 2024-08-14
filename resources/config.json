@@ -1,5 +1,6 @@
 {
     "QuestAddress": "REPLACE WITH QUEST IP",
     "QuestPort": 3500,
-    "UpdateInterval": 2000
+    "UpdateInterval": 2000,
+    "IdleTimeoutMinutes": 30
 }

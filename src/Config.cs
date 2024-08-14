@@ -8,4 +8,5 @@ public class Config {
     public string QuestAddress {get; set;}
     public int QuestPort {get; set;}
     public int UpdateInterval {get; set;} // In milliseconds
+    public int IdleTimeoutMinutes {get; set;}
 }

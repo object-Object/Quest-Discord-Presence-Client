@@ -49,10 +49,19 @@ namespace Quest_Discord_Presence_Client {
                         Console.WriteLine("Stopped counting elapsed time");
                         wasElapsed = false;
                     }
-                    
-                    // Set the received presence
-                    client.SetPresence(fetchedStatus.ConvertToDiscord(elapsedStartTime));
-                    Console.WriteLine("Successfully fetched presence");
+
+                    if (
+                        fetchedStatus.elapsed
+                        && app.Config.IdleTimeoutMinutes > 0
+                        && DateTime.UtcNow.Subtract(elapsedStartTime).TotalMinutes > app.Config.IdleTimeoutMinutes
+                    ) {
+                        client.ClearPresence();
+                        Console.WriteLine($"Disabling presence due to idling for more than {app.Config.IdleTimeoutMinutes} minutes");
+                    } else {
+                        // Set the received presence
+                        client.SetPresence(fetchedStatus.ConvertToDiscord(elapsedStartTime));
+                        Console.WriteLine("Successfully fetched presence");
+                    }
 
                     LastRequestStatus = ClientStatus.RequestSucceeded;
                 }   catch(Exception ex) {                    
