@@ -16,6 +16,7 @@ namespace Quest_Discord_Presence_Client {
         private DiscordRpcClient client;
 
         private DateTime elapsedStartTime;
+        private DateTime idleTimeoutStartTime;
         private bool wasElapsed = false;
 
         public ClientStatus LastRequestStatus {get; private set;} = ClientStatus.NoRequestMade;
@@ -43,6 +44,9 @@ namespace Quest_Discord_Presence_Client {
 
                     if(fetchedStatus.elapsed && !wasElapsed) {
                         elapsedStartTime = DateTime.UtcNow;
+                        if (oldRequestStatus == ClientStatus.RequestSucceeded) {
+                            idleTimeoutStartTime = elapsedStartTime;
+                        }
                         Console.WriteLine("Started counting elapsed time");
                         wasElapsed = true;
                     }   else if(!fetchedStatus.elapsed && wasElapsed) {
@@ -53,7 +57,7 @@ namespace Quest_Discord_Presence_Client {
                     if (
                         fetchedStatus.elapsed
                         && app.Config.IdleTimeoutMinutes > 0
-                        && DateTime.UtcNow.Subtract(elapsedStartTime).TotalMinutes > app.Config.IdleTimeoutMinutes
+                        && DateTime.UtcNow.Subtract(idleTimeoutStartTime).TotalMinutes > app.Config.IdleTimeoutMinutes
                     ) {
                         client.ClearPresence();
                         Console.WriteLine($"Disabling presence due to idling for more than {app.Config.IdleTimeoutMinutes} minutes");
