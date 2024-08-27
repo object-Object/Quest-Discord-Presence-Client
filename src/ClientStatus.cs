@@ -11,36 +11,12 @@ namespace Quest_Discord_Presence_Client
             this.Info = info;
         }
 
-        public static ClientStatus RequestFailed
-        {
-            get
-            {
-                return new ClientStatus("The client could not reach your quest.\nMake sure that beat saber is open, your headset on\nand your IP address correct");
-            }
-        }
+        public static readonly ClientStatus RequestFailed = new ClientStatus("The client could not reach your quest.\nMake sure that beat saber is open, your headset on\nand your IP address correct");
 
-        public static ClientStatus RequestSucceeded
-        {
-            get
-            {
-                return new ClientStatus("Successfully received presence from Quest!");
-            }
-        }
+        public static readonly ClientStatus RequestSucceeded = new ClientStatus("Successfully received presence from Quest!");
 
-        public static ClientStatus RequestSucceededButIdle
-        {
-            get
-            {
-                return new ClientStatus("Successfully received presence from Quest,\nbut disabled Discord presence due to idle timeout");
-            }
-        }
+        public static readonly ClientStatus RequestSucceededButIdle = new ClientStatus("Successfully received presence from Quest,\nbut disabled Discord presence due to idle timeout");
 
-        public static ClientStatus NoRequestMade
-        {
-            get
-            {
-                return new ClientStatus("No request to your quest has been made yet");
-            }
-        }
+        public static readonly ClientStatus NoRequestMade = new ClientStatus("No request to your quest has been made yet");
     }
 }

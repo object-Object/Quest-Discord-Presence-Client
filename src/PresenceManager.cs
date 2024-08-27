@@ -45,6 +45,7 @@ namespace Quest_Discord_Presence_Client {
                     if(fetchedStatus.elapsed && !wasElapsed) {
                         elapsedStartTime = DateTime.UtcNow;
                         if (oldRequestStatus == ClientStatus.RequestSucceeded) {
+                            Console.WriteLine("Started counting idle time");
                             idleTimeoutStartTime = elapsedStartTime;
                         }
                         Console.WriteLine("Started counting elapsed time");
